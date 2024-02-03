@@ -1,0 +1,69 @@
+
+<div *ngIf="mostrarFlujoList">
+    <div *ngFor="let flujo of flujosArray; let i = index "  fxLayoutAlign="center center" >
+
+    
+           
+            <mat-card class="flujoList">
+                <mat-card-header >
+                <mat-card-title >
+                    <mat-form-field ><textarea  matInput [(ngModel)]="flujo.descripcion"></textarea>
+                    </mat-form-field>
+                </mat-card-title>
+                <mat-card-subtitle>
+                    <mat-form-field appearance="fill">
+                        <input matInput [(ngModel)]="flujo.opcion" >
+                    </mat-form-field>
+                </mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-actions>
+                <button mat-button (click)="editarFlujo(i)">Editar</button>
+                <button mat-button (click)="mostrarFlujosSiguientes(flujo._id)">Agregar</button>
+                <button mat-button (click)="eliminarFlujo(flujo)">Eliminar</button>
+                </mat-card-actions>
+            </mat-card>
+            <br>
+       
+    </div>
+</div>
+<div class="flujoListAgregar" (submit)="agregarFlujo()" *ngIf="banderaFormularioMostrar">
+    <div >
+        <form  [formGroup]="agregarForm"  class="formulario">
+            <mat-form-field appearance="fill">
+                <mat-label>Descripcion</mat-label>
+                <textarea matInput formControlName="descripcion" ></textarea>
+                <mat-hint>Descripcion</mat-hint>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Opcion</mat-label>
+                <input matInput formControlName="opcion">
+                <mat-hint>Opcion</mat-hint>
+            </mat-form-field>
+           
+                
+                <button mat-raised-button>Agregar</button>
+               
+            
+        </form>
+    </div>
+    <div *ngFor="let flujo of flujosArrayAgregar" >
+
+    
+       <div >
+        <mat-card class="flujoList" >
+            <mat-card-header>
+            <mat-card-title>{{flujo.descripcion}}</mat-card-title>
+            <mat-card-subtitle>{{flujo.opcion}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-actions>
+            <button mat-button (click)="mostrarFlujosSiguientes(flujo._id)">Agregar</button>
+            <button mat-button>Eliminar</button>
+            </mat-card-actions>
+        </mat-card>
+       </div>
+      
+        <br>
+    
+    </div>
+    
+</div>
